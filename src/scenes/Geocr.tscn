@@ -1,0 +1,193 @@
+[gd_scene load_steps=6 format=3 uid="uid://bov78k3acp3pm"]
+
+[ext_resource type="Script" path="res://scripts/screen/Geocr.gd" id="1_ddpku"]
+[ext_resource type="PackedScene" uid="uid://s4d2bfon0215" path="res://scenes/NodeDezoomify.tscn" id="2_6esd3"]
+[ext_resource type="Script" path="res://scripts/components/GeoscribeGraph.gd" id="2_t4swj"]
+[ext_resource type="PackedScene" uid="uid://dy2go68767ooy" path="res://scenes/NodeFolder.tscn" id="3_knhup"]
+[ext_resource type="PackedScene" uid="uid://cjsqtpler32xw" path="res://scenes/NodeVariable.tscn" id="4_owdbp"]
+
+[node name="Geocr" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ddpku")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Toolbar" type="Panel" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="ToolbarH" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Toolbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_right = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="MenuButton" type="MenuButton" parent="MarginContainer/VBoxContainer/Toolbar/ToolbarH"]
+layout_mode = 2
+text = "Fichier"
+item_count = 5
+popup/item_0/text = "Nouveau"
+popup/item_0/id = 0
+popup/item_1/text = "Charger"
+popup/item_1/id = 1
+popup/item_2/text = "Sauvegarder"
+popup/item_2/id = 2
+popup/item_2/disabled = true
+popup/item_3/text = ""
+popup/item_3/id = 3
+popup/item_3/separator = true
+popup/item_4/text = "Quitter"
+popup/item_4/id = 4
+
+[node name="MenuButton2" type="MenuButton" parent="MarginContainer/VBoxContainer/Toolbar/ToolbarH"]
+layout_mode = 2
+text = "Projet"
+item_count = 5
+popup/item_0/text = "Nouveau"
+popup/item_0/id = 0
+popup/item_1/text = "Charger"
+popup/item_1/id = 1
+popup/item_2/text = "Sauvegarder"
+popup/item_2/id = 2
+popup/item_2/disabled = true
+popup/item_3/text = ""
+popup/item_3/id = 3
+popup/item_3/separator = true
+popup/item_4/text = "Quitter"
+popup/item_4/id = 4
+
+[node name="MenuButton4" type="MenuButton" parent="MarginContainer/VBoxContainer/Toolbar/ToolbarH"]
+layout_mode = 2
+text = "Aide
+"
+item_count = 5
+popup/item_0/text = "Nouveau"
+popup/item_0/id = 0
+popup/item_1/text = "Charger"
+popup/item_1/id = 1
+popup/item_2/text = "Sauvegarder"
+popup/item_2/id = 2
+popup/item_2/disabled = true
+popup/item_3/text = ""
+popup/item_3/id = 3
+popup/item_3/separator = true
+popup/item_4/text = "Quitter"
+popup/item_4/id = 4
+
+[node name="GraphPanel" type="Panel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/GraphPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/GraphPanel/HBoxContainer"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/GraphPanel/HBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GraphPanel/HBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Dossiers" type="Label" parent="MarginContainer/VBoxContainer/GraphPanel/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Dossiers"
+
+[node name="FileExplorer" type="ItemList" parent="MarginContainer/VBoxContainer/GraphPanel/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+auto_height = true
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GraphPanel/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Pipelines"
+
+[node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer/GraphPanel/HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+auto_height = true
+item_count = 6
+item_0/text = "Dezoomify"
+item_1/text = "Extraction des images"
+item_2/text = "Océrisation"
+item_3/text = "Traitement des données"
+item_4/text = "Geoindex"
+item_5/text = "Géolocalisation"
+
+[node name="Graph" type="GraphEdit" parent="MarginContainer/VBoxContainer/GraphPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+right_disconnects = true
+connection_lines_thickness = 5.0
+script = ExtResource("2_t4swj")
+metadata/_edit_use_anchors_ = true
+
+[node name="DezoomifyNode" parent="MarginContainer/VBoxContainer/GraphPanel/HBoxContainer/Graph" instance=ExtResource("2_6esd3")]
+layout_mode = 1
+offset_left = 694.0
+offset_top = 368.0
+offset_right = 1155.0
+offset_bottom = 568.0
+mouse_filter = 1
+position_offset = Vector2(694, 368)
+
+[node name="Folder" parent="MarginContainer/VBoxContainer/GraphPanel/HBoxContainer/Graph" instance=ExtResource("3_knhup")]
+layout_mode = 0
+offset_left = 1335.0
+offset_top = 386.0
+offset_right = 1526.0
+offset_bottom = 488.0
+mouse_filter = 1
+position_offset = Vector2(1335, 386)
+
+[node name="Variables" parent="MarginContainer/VBoxContainer/GraphPanel/HBoxContainer/Graph" instance=ExtResource("4_owdbp")]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 325.0
+offset_right = 442.0
+offset_bottom = 636.0
+mouse_filter = 1
+position_offset = Vector2(144, 325)
+
+[connection signal="connection_request" from="MarginContainer/VBoxContainer/GraphPanel/HBoxContainer/Graph" to="." method="_on_graph_edit_connection_request"]
+[connection signal="disconnection_request" from="MarginContainer/VBoxContainer/GraphPanel/HBoxContainer/Graph" to="." method="_on_graph_disconnection_request"]

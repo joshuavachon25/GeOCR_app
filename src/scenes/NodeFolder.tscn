@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy2go68767ooy"]
+
+[ext_resource type="Script" path="res://scripts/components/nodes/NodeFolder.gd" id="1_t6poj"]
+
+[sub_resource type="Theme" id="Theme_bst5t"]
+
+[node name="Folder" type="GraphNode"]
+modulate = Color(0.72549, 0.596078, 0.113725, 1)
+offset_right = 191.0
+offset_bottom = 102.0
+theme = SubResource("Theme_bst5t")
+title = "Folder"
+slot/0/left_enabled = true
+slot/0/left_type = 1
+slot/0/left_color = Color(0, 0.792157, 0.0352941, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 1
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("1_t6poj")
+
+[node name="FolderName" type="Label" parent="."]
+layout_mode = 2
+text = "Folder name"

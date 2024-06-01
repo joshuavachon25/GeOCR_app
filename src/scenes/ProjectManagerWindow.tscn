@@ -1,0 +1,130 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgogyjnyk5s61"]
+
+[ext_resource type="Script" path="res://scripts/screen/ProjectManager.gd" id="1_tddd7"]
+[ext_resource type="Texture2D" uid="uid://d130okjd50bfy" path="res://assets/splash2.jpg" id="2_jdrh7"]
+[ext_resource type="Texture2D" uid="uid://vdurqe0fkhn" path="res://assets/ui/g479.png" id="2_rmx4h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrhmu"]
+bg_color = Color(0.0901961, 0.0980392, 0.0862745, 1)
+
+[node name="ProjectManager" type="Window"]
+initial_position = 2
+size = Vector2i(800, 400)
+borderless = true
+popup_window = true
+min_size = Vector2i(800, 400)
+script = ExtResource("1_tddd7")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+texture = ExtResource("2_jdrh7")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+color = Color(0.00392157, 0.00392157, 0.00392157, 0.690196)
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/HBoxContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+texture = ExtResource("2_rmx4h")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ExitButton" type="Button" parent="PanelContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "   Quitter   "
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 0
+
+[node name="NewProjectButton" type="Button" parent="PanelContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Nouveau projet"
+
+[node name="LoadProjectButton" type="Button" parent="PanelContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Charger un projet
+"
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/PanelContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Projets récents"
+
+[node name="Panel" type="Panel" parent="PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_yrhmu")
+
+[node name="LastProjectsList" type="ItemList" parent="PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="NoProjectOverlay" type="ColorRect" parent="PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.0470588)
+
+[connection signal="pressed" from="PanelContainer/HBoxContainer/PanelContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/PanelContainer/VBoxContainer/NewProjectButton" to="." method="_on_new_project_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/PanelContainer/VBoxContainer/LoadProjectButton" to="." method="_on_load_project_button_pressed"]
+[connection signal="item_selected" from="PanelContainer/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Panel/LastProjectsList" to="." method="_on_last_projects_list_item_selected"]

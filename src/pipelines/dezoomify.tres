@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Pipeline" load_steps=2 format=3 uid="uid://culmcay4dgnpa"]
+
+[ext_resource type="Script" path="res://scripts/Pipeline.gd" id="1_ns2n0"]
+
+[resource]
+script = ExtResource("1_ns2n0")
+name = ""
+nodes = []
+connections = []

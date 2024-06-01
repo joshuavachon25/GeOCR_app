@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://cy3x5aom0oi2g"]
+
+[ext_resource type="Script" path="res://scripts/screen/MainWindow.gd" id="1_qqyoi"]
+[ext_resource type="PackedScene" uid="uid://c4ak4ykqmgkat" path="res://scenes/TopBar.tscn" id="2_ym2hj"]
+[ext_resource type="PackedScene" uid="uid://do0qkcdujmpn1" path="res://scenes/StatusBar.tscn" id="4_et0dq"]
+[ext_resource type="PackedScene" uid="uid://cka2mmisi0xoa" path="res://scenes/Resizing.tscn" id="5_q1cfe"]
+[ext_resource type="PackedScene" uid="uid://bov78k3acp3pm" path="res://scenes/Geocr.tscn" id="7_qdkss"]
+[ext_resource type="PackedScene" uid="uid://cdgnnaqipwaq7" path="res://scenes/SettingsWindow.tscn" id="8_dw0qw"]
+[ext_resource type="PackedScene" uid="uid://dgogyjnyk5s61" path="res://scenes/ProjectManagerWindow.tscn" id="9_3pxfy"]
+
+[node name="MainWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qqyoi")
+
+[node name="Layout" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TopBar" parent="Layout" instance=ExtResource("2_ym2hj")]
+layout_mode = 2
+
+[node name="Geocr" parent="Layout" instance=ExtResource("7_qdkss")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StatusBar" parent="Layout" instance=ExtResource("4_et0dq")]
+layout_mode = 2
+
+[node name="Resizing" parent="." instance=ExtResource("5_q1cfe")]
+layout_mode = 1
+
+[node name="Overlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0235294, 0.0470588, 0.0235294, 0.635294)
+
+[node name="Settings" parent="." instance=ExtResource("8_dw0qw")]
+visible = false
+
+[node name="ProjectManager" parent="." instance=ExtResource("9_3pxfy")]
+
+[node name="OpenProject" type="FileDialog" parent="."]
+unique_name_in_owner = true
+title = "Open a File"
+initial_position = 2
+size = Vector2i(392, 300)
+min_size = Vector2i(350, 300)
+ok_button_text = "Open"
+cancel_button_text = "Annuler"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.geocr")
+
+[node name="SaveProject" type="FileDialog" parent="."]
+unique_name_in_owner = true
+initial_position = 2
+size = Vector2i(454, 300)
+min_size = Vector2i(400, 300)
+cancel_button_text = "Annuler"
+access = 2
+filters = PackedStringArray("*.geocr")
+
+[connection signal="newProjectPopup" from="ProjectManager" to="." method="_on_project_manager_new_project_popup"]
+[connection signal="openProjectPopup" from="ProjectManager" to="." method="_on_project_manager_open_project_popup"]
+[connection signal="file_selected" from="OpenProject" to="." method="_on_open_project_file_selected"]
+[connection signal="file_selected" from="SaveProject" to="." method="_on_save_project_file_selected"]
