@@ -1,6 +1,8 @@
 extends Control
 
 func _ready():
+	var test: Archive = Archive.new()
+	test.print_something("chat")
 	get_window().min_size = Vector2i(600, 600)
 	if OS.get_cmdline_args():
 		open_file(OS.get_cmdline_args()[0])

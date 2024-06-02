@@ -1,11 +1,12 @@
 #include "register_types.hpp"
+#include "archive.hpp"
 
 using namespace godot;
 
 void initialize_geocr_library_init_module(ModuleInitializationLevel p_level){
   if(p_level != MODULE_INITIALIZATION_LEVEL_SCENE)
     return;
-    //ClassDB::register_class<ocr>
+    ClassDB::register_class<Archive>();
 }
 
 

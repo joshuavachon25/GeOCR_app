@@ -1,5 +1,3 @@
-import os
+import subprocess
 
-os.chdir("gd_extensions/geocr")
-os.system("scons target=template_debug")
-os.chdir("../..")
+subprocess.run('scons target=template_debug platform=windows', shell=True, cwd='gd_extensions/geocr')
