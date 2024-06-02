@@ -1,5 +1,14 @@
 import os
+import subprocess
 import platform as os_platform
+
+def is_cmake_installed():
+    try:
+        result = subprocess.run(['cmake', '--version'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return result.returncode == 0
+    except FileNotFoundError:
+        return False
+
 
 env = SConscript('../godot_cpp/SConstruct')
 env.Append(CPPPATH=['src'])
@@ -8,10 +17,47 @@ env.Append(CPPPATH=['src'])
 num_jobs = ARGUMENTS.get('jobs', 4)
 platform = ARGUMENTS.get('platform', 'windows')
 
-if not os.path.exists(dest_dir):
-    os.makedirs(dest_dir, exist_ok=True)
+env.Append(LIBS=[
+    'opencv_core490', 
+    'opencv_imgproc490', 
+    'opencv_highgui490', 
+    'tesseract53'
+])
 
 if platform == 'windows':
+    folder_opencv_bin = os.path.join(
+        os.path.dirname(os.path.realpath('__file__')), 'opencv_bin')
+    folder_tesseract_bin = os.path.join(
+        os.path.dirname(os.path.realpath('__file__')), 'tesseract_bin')
+    os.makedirs(folder_opencv_bin, exist_ok=True)
+    os.makedirs(folder_tesseract_bin, exist_ok=True)
+
+    if not is_cmake_installed():
+        print("CMake is not installed or not added to PATH. Please install CMake and try again.")
+        exit(1)
+
+    # Building OpenCV
+    os.chdir('opencv')
+    os.system(f'cmake -S . -B build -DCMAKE_INSTALL_PREFIX={folder_opencv_bin} -G "Visual Studio 17 2022"')
+    os.system(f'cmake --build build --config Release --target INSTALL -- /maxcpucount:{num_jobs}')
+    os.chdir('..')
+
+    # Building Tesseract
+    os.chdir('tesseract')
+    os.system(f'cmake -S . -B build -DCMAKE_INSTALL_PREFIX={folder_tesseract_bin} -G "Visual Studio 17 2022"')
+    os.system(f'cmake --build build --config Release --target INSTALL -- /maxcpucount:{num_jobs}')
+    os.chdir('..')
+
+    if os_platform.system().lower() == 'windows':
+        env.Append(LIBS=[
+            'opencv_core490.lib', 
+            'opencv_imgproc490.lib', 
+            'opencv_highgui490.lib', 
+            'tesseract53.lib'
+        ])
+    
+    env.Append(CPPPATH=[os.path.join(folder_opencv_bin, 'include'), os.path.join(folder_tesseract_bin, 'include')])
+    env.Append(LIBPATH=[os.path.join(folder_opencv_bin, 'x64/vc17/lib'), os.path.join(folder_tesseract_bin, 'lib')])
 
 
 src = Glob('src/*.cpp')

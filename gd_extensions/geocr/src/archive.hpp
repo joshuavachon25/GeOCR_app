@@ -11,8 +11,8 @@ class Archive: public Resource{
   private:
 
   public:
-    inline void print_something(String a_text);
+    void print_something(String a_text);
 
   protected:
-    static inline void _bind_methods();
+    static void _bind_methods();
 };
