@@ -1,3 +1,9 @@
 [submodule "gd_extensions/godot_cpp"]
 	path = gd_extensions/godot_cpp
 	url = https://github.com/godotengine/godot-cpp.git
+[submodule "gd_extensions/geocr/opencv"]
+	path = gd_extensions/geocr/opencv
+	url = https://github.com/opencv/opencv.git
+[submodule "gd_extensions/geocr/tesseract"]
+	path = gd_extensions/geocr/tesseract
+	url = https://github.com/tesseract-ocr/tesseract.git
